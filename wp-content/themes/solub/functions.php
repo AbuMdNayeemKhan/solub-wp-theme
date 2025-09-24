@@ -58,13 +58,22 @@ function solub_setup() {
 endif;
 add_action( 'after_setup_theme', 'solub_setup' );
 
-
 // solub scripts and styles 
 function solub_theme_scripts() {
+
+	// Styles
+	wp_enqueue_style( 'animate', get_template_directory_uri() . '/assets/css/animate.css', array(), '1.1', 'all' );
+	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.css', array(), '5.2.3', 'all' );
+	wp_enqueue_style( 'font-awesome-pro', get_template_directory_uri() . '/assets/css/font-awesome-pro.css', array(), '6.0.0', 'all' );
+	wp_enqueue_style( 'magnific-popup', get_template_directory_uri() . '/assets/css/magnific-popup.css', array(), '1.1', 'all' );
+	wp_enqueue_style( 'nice-select', get_template_directory_uri() . '/assets/css/nice-select.css', array(), '1.1', 'all' );
+	wp_enqueue_style( 'slick', get_template_directory_uri() . '/assets/css/slick.css', array(), '1.1', 'all' );
+	wp_enqueue_style( 'swiper-bundle', get_template_directory_uri() . '/assets/css/swiper-bundle.css', array(), '8.2.2', 'all' );
+	wp_enqueue_style( 'solub-spacing', get_template_directory_uri() . '/assets/css/spacing.css', array(), '1.1', 'all' );
+	wp_enqueue_style( 'solub-main', get_template_directory_uri() . '/assets/css/main.css', array(), '1.1', 'all' );
 	wp_enqueue_style( 'style', get_stylesheet_uri() );
 
-	wp_enqueue_style( 'slider', get_template_directory_uri() . '/css/slider.css', array(), '1.1', 'all' );
-
+	// Scripts
 	wp_enqueue_script( 'script', get_template_directory_uri() . '/js/script.js', array( 'jquery' ), 1.1, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
