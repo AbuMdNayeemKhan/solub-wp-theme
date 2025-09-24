@@ -25,7 +25,7 @@ function solub_setup() {
 	 * Enable support for Post Thumbnails on posts and pages.
 	 */
 	add_theme_support( 'post-thumbnails' );
-	set_post_thumbnail_size( 825, 510, true );
+	// set_post_thumbnail_size( 825, 510, true );
 
 	// This theme uses wp_nav_menu() in two locations.
 	register_nav_menus( array(
@@ -49,38 +49,26 @@ function solub_setup() {
 	 * Enable support for Post Formats.
 	 */
 	add_theme_support( 'post-formats', array(
-		'aside',
 		'image',
 		'video',
-		'quote',
-		'link',
 		'gallery',
-		'status',
 		'audio',
-		'chat',
 	) );
-
-	// Custom background support
-	if ( function_exists( 'solub_get_color_scheme' ) ) {
-		$color_scheme  = solub_get_color_scheme();
-		$default_color = trim( $color_scheme[0], '#' );
-	} else {
-		$default_color = 'ffffff'; // fallback default
-	}
-
-	add_theme_support( 'custom-background', apply_filters( 'solub_custom_background_args', array(
-		'default-color'      => $default_color,
-		'default-attachment' => 'fixed',
-	) ) );
-
-	/*
-	 * This theme styles the visual editor to resemble the theme style.
-	 */
-	if ( function_exists( 'solub_fonts_url' ) ) {
-		add_editor_style( array( 'css/editor-style.css', 'genericons/genericons.css', solub_fonts_url() ) );
-	} else {
-		add_editor_style( array( 'css/editor-style.css', 'genericons/genericons.css' ) );
-	}
 }
 endif;
 add_action( 'after_setup_theme', 'solub_setup' );
+
+
+// solub scripts and styles 
+function solub_theme_scripts() {
+	wp_enqueue_style( 'style', get_stylesheet_uri() );
+
+	wp_enqueue_style( 'slider', get_template_directory_uri() . '/css/slider.css', array(), '1.1', 'all' );
+
+	wp_enqueue_script( 'script', get_template_directory_uri() . '/js/script.js', array( 'jquery' ), 1.1, true );
+
+	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+		wp_enqueue_script( 'comment-reply' );
+	}
+}
+add_action( 'wp_enqueue_scripts', 'solub_theme_scripts' );
